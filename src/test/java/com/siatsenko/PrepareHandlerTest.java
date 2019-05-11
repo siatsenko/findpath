@@ -10,22 +10,32 @@ import static org.junit.Assert.*;
 public class PrepareHandlerTest {
 
     private static final List<String> LIST = Arrays.asList(
-            ".............",
-            "..S...#..#...",
-            "......#.#....",
-            "........#.X.."
+            "..........",
+            ".S...#..#.",
+            ".....#.#..",
+            ".......#.X"
     );
 
-    private static final int[][] ARRAY =
+    private static final char[][] ARRAY =
             {
-                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0}
+                    {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+                    {'.', 'S', '.', '.', '.', '#', '.', '.', '#', '.'},
+                    {'.', '.', '.', '.', '.', '#', '.', '#', '.', '.'},
+                    {'.', '.', '.', '.', '.', '.', '.', '#', '.', 'X'},
             };
 
     @Test
-    public void getFromList() {
-        assertArrayEquals(ARRAY,new PrepareHandler().getFromList(LIST));
+    public void getArrayFromList() {
+        assertArrayEquals(ARRAY, new PrepareHandler().getArrayFromList(LIST));
+    }
+
+    @Test
+    public void getNodesFromArray() {
+        PrepareHandler prepareHandler = new PrepareHandler(LIST);
+        List<Node> nodes = prepareHandler.getNodesFromArray();
+        assertEquals(40, nodes.size());
+        assertTrue(nodes.get(11).isStart());
+        assertTrue(nodes.get(39).isFinish());
+        assertNull(nodes.get(37));
     }
 }
