@@ -1,14 +1,17 @@
-package com.siatsenko;
+package com.siatsenko.findpath.processing;
 
+import com.siatsenko.findpath.input.InputReaderStdIn;
+import com.siatsenko.findpath.prepare.PrepareHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class iFindPathTest {
+public class FindPathTest {
 
     private static final String INPUT_STRING = "" +
             "....................................\n" +
@@ -28,7 +31,7 @@ public class iFindPathTest {
 
 
     private static final String OUTPUT_STRING =
-            "l,l,l,d,d,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,d,d,d,d,d,d,d,d";
+            "r,r,r,d,d,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,d,d,d,d,d,d,d,d";
 
     @Before
     public void before() {
@@ -43,7 +46,10 @@ public class iFindPathTest {
 
     @Test
     public void get() {
-        String path = new FindPathInputReaderStdIn().findPath();
+        List<String> strings = new InputReaderStdIn().getStrings();
+        PrepareHandler prepareHandler = new PrepareHandler(strings);
+        PathHandler pathHandler = new PathHandler(prepareHandler.getNodes());
+        String path = pathHandler.findPath();
         assertEquals(OUTPUT_STRING, path);
     }
 

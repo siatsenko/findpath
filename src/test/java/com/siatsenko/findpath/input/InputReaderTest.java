@@ -1,17 +1,19 @@
-package com.siatsenko;
+package com.siatsenko.findpath.input;
 
-import com.siatsenko.InputHandler;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class InputHandlerTest {
+public class InputReaderTest {
 
     private static final String INPUT_STRING_CORRECT = "" +
             ".............\n" +
@@ -68,61 +70,68 @@ public class InputHandlerTest {
             "........#..X."
     );
 
+    @After
+    public void after() {
+        System.setIn(System.in);
+    }
+
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Test
     public void getFromReader() {
-        List<String> list = new InputHandler(new StringReader(INPUT_STRING_CORRECT)).getFromReader();
+        ByteArrayInputStream in = new ByteArrayInputStream(INPUT_STRING_CORRECT.getBytes());
+        System.setIn(in);
+        List<String> list = new InputReaderStdIn().getStrings();
         assertEquals(CORRECT_LIST,list);
     }
 
     @Test
     public void checkValidInputList() {
-        InputHandler inputHandler = new InputHandler();
-        assertTrue(inputHandler.checkValidInputList(CORRECT_LIST));
+        InputReaderStdIn inputReader = new InputReaderStdIn();
+        assertTrue(inputReader.checkValidInputList(CORRECT_LIST));
     }
 
     @Test
     public void checkValidInputListWrong1() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Wrong list size");
-        new InputHandler().checkValidInputList(WRONG_LIST_1);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_1);
     }
 
     @Test
     public void checkValidInputListWrong2() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Start marker not found");
-        new InputHandler().checkValidInputList(WRONG_LIST_2);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_2);;
     }
 
     @Test
     public void checkValidInputListWrong3() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Finish marker not found");
-        new InputHandler().checkValidInputList(WRONG_LIST_3);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_3);
     }
 
     @Test
     public void checkValidInputListWrong4() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Maze has more then one Start marker");
-        new InputHandler().checkValidInputList(WRONG_LIST_4);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_4);
     }
 
     @Test
     public void checkValidInputListWrong5() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Maze has more then one Finish marker");
-        new InputHandler().checkValidInputList(WRONG_LIST_5);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_5);
     }
 
     @Test
     public void checkValidInputListWrong6() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Maze has forbidden symbol");
-        new InputHandler().checkValidInputList(WRONG_LIST_6);
+        new InputReaderStdIn().checkValidInputList(WRONG_LIST_6);
     }
 
 }

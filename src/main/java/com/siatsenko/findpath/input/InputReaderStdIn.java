@@ -1,9 +1,9 @@
-package com.siatsenko;
+package com.siatsenko.findpath.input;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class FindPathInputReaderStdIn extends AbstractFindPathInputReader {
+public class InputReaderStdIn extends AbstractInputReader {
 
     @Override
     Reader getReader() {

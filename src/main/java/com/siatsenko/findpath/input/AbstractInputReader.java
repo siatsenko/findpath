@@ -1,4 +1,4 @@
-package com.siatsenko;
+package com.siatsenko.findpath.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,29 +6,18 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siatsenko.GeneralProperties.*;
+import static com.siatsenko.findpath.common.CommonProperties.*;
 
-public class InputHandler {
+public abstract class AbstractInputReader {
 
-    private Reader reader;
+    abstract Reader getReader();
 
-    public InputHandler() {
-    }
-
-    public InputHandler(Reader reader) {
-        this.reader = reader;
-    }
-
-    public List<String> getFromReader() {
-        return getFromReader(reader);
-    }
-
-    protected List<String> getFromReader(Reader reader) {
-        List<String> list = new ArrayList<String>();
-        BufferedReader bufferedReader = new BufferedReader(reader);
+    public List<String> getStrings() {
+        List<String> list = new ArrayList<>();
+        BufferedReader bufferedReader = new BufferedReader(getReader());
         try {
             String line = bufferedReader.readLine();
-            while (line != null) {
+            while (line != null && !"".equals(line)) {
                 list.add(line);
                 line = bufferedReader.readLine();
             }

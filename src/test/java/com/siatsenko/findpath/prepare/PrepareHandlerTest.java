@@ -1,5 +1,6 @@
-package com.siatsenko;
+package com.siatsenko.findpath.prepare;
 
+import com.siatsenko.findpath.entity.Node;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -25,8 +26,8 @@ public class PrepareHandlerTest {
             };
 
     @Test
-    public void getArrayFromList() {
-        assertArrayEquals(ARRAY, new PrepareHandler().getArrayFromList(LIST));
+    public void getArrayFromStrings() {
+        assertArrayEquals(ARRAY, new PrepareHandler().getArrayFromStrings(LIST));
     }
 
     @Test
@@ -37,9 +38,5 @@ public class PrepareHandlerTest {
         assertTrue(nodes.get(11).isStart());
         assertTrue(nodes.get(39).isFinish());
         assertNull(nodes.get(37));
-
-        for (int i = 0; i < nodes.size(); i++) {
-            System.out.println(nodes.get(i));
-        }
     }
 }

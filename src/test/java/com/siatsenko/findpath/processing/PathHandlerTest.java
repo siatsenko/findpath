@@ -1,5 +1,6 @@
-package com.siatsenko;
+package com.siatsenko.findpath.processing;
 
+import com.siatsenko.findpath.entity.Node;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,11 +10,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class PathHandlerTest {
-    /*
-        .S..
-        .#..
-        ..X.
-    */
+/*
+*        .S..
+*        .#..
+*        ..X.
+**/
     private static final List<Node> NODES = new ArrayList<>(Arrays.asList(
             new Node(false, false, Arrays.asList(1, 4, null, null)),
             new Node(true, false, Arrays.asList(2, null, 0, null)),
@@ -46,6 +47,6 @@ public class PathHandlerTest {
     @Test
     public void findPath() {
         PathHandler pathHandler = new PathHandler(NODES);
-        assertEquals("l,d,d", pathHandler.findPath());
+        assertEquals("r,d,d", pathHandler.findPath());
     }
 }

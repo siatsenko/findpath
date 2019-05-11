@@ -1,11 +1,15 @@
-package com.siatsenko;
+package com.siatsenko.findpath.processing;
 
+import com.siatsenko.findpath.entity.Node;
+import com.siatsenko.findpath.entity.NodeState;
+
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.siatsenko.GeneralProperties.*;
-
 public class PathHandler {
+    public static final String PATH_NOT_FOUND = "Path not found";
+    public static final List<String> STEPS = Arrays.asList("r", "d", "l", "u");
 
     List<Node> nodes;
     int startIndex;
@@ -16,7 +20,7 @@ public class PathHandler {
         setIndexes();
     }
 
-    String findPath() {
+    public String findPath() {
         LinkedList<Node> queue = new LinkedList<>();
         Node startNode = nodes.get(startIndex);
         startNode.setState(NodeState.FOUND);

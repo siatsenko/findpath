@@ -1,10 +1,11 @@
-package com.siatsenko;
+package com.siatsenko.findpath.prepare;
+
+import com.siatsenko.findpath.entity.Node;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.siatsenko.GeneralProperties.*;
-
+import static com.siatsenko.findpath.common.CommonProperties.*;
 
 public class PrepareHandler {
 
@@ -17,12 +18,12 @@ public class PrepareHandler {
     }
 
     public PrepareHandler(List<String> list) {
-        this.mazeArray = getArrayFromList(list);
+        this.mazeArray = getArrayFromStrings(list);
         this.rowCount = mazeArray.length;
         this.colCount = mazeArray[0].length;
     }
 
-    List<Node> getNodes() {
+    public List<Node> getNodes() {
         List<Node> list = new ArrayList<>(rowCount * colCount);
         for (int row = 0; row < rowCount; row++) {
             for (int col = 0; col < colCount; col++) {
@@ -61,7 +62,7 @@ public class PrepareHandler {
         return list;
     }
 
-    char[][] getArrayFromList(List<String> list) {
+    char[][] getArrayFromStrings(List<String> list) {
         int maxRow = list.size();
         int maxCol = list.get(0).length();
         char[][] array = new char[maxRow][maxCol];

@@ -1,4 +1,4 @@
-package com.siatsenko;
+package com.siatsenko.findpath.entity;
 
 import java.util.ArrayList;
 import java.util.List;
