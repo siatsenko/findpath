@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-    private int num;
     private boolean start;
     private boolean finish;
 
@@ -14,27 +13,17 @@ public class Node {
     private String path;
 
     public Node(int num) {
-        this.num = num;
         this.state = NodeState.UNTOUCHED;
         this.step = 0;
         this.neighboursIndexes = new ArrayList<Integer>(4);
     }
 
-    public Node(int num, boolean start, boolean finish, List<Integer> neighboursIndexes) {
-        this.num = num;
+    public Node(boolean start, boolean finish, List<Integer> neighboursIndexes) {
         this.start = start;
         this.finish = finish;
         this.state = NodeState.UNTOUCHED;
         this.step = 0;
         this.neighboursIndexes = neighboursIndexes;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
     }
 
     public boolean isStart() {
@@ -84,8 +73,12 @@ public class Node {
     @Override
     public String toString() {
         return "Node{" +
-                "num=" + num +
+                "start=" + start +
+                ", finish=" + finish +
+                ", state=" + state +
                 ", step=" + step +
+                ", neighboursIndexes=" + neighboursIndexes +
+                ", path='" + path + '\'' +
                 '}';
     }
 }

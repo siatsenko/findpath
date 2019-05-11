@@ -37,5 +37,9 @@ public class PrepareHandlerTest {
         assertTrue(nodes.get(11).isStart());
         assertTrue(nodes.get(39).isFinish());
         assertNull(nodes.get(37));
+
+        for (int i = 0; i < nodes.size(); i++) {
+            System.out.println(nodes.get(i));
+        }
     }
 }

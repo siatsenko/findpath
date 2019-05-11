@@ -38,16 +38,21 @@ public class PrepareHandler {
                 if (point.getValue() == FINISH_SYMBOL) {
                     node.setFinish(true);
                 }
+                List<Integer> neighbours = node.getNeighboursIndexes();
                 for (int i = 0; i < 4; i++) {
                     Point neighbourPoint = point.move(i);
                     if (neighbourPoint == null) {
+                        neighbours.add(null);
                         continue;
                     }
                     if (!neighbourPoint.isValid()) {
+                        neighbours.add(null);
                         continue;
                     }
                     if (neighbourPoint.getValue() != BLOCKED_SYMBOL) {
-                        node.getNeighboursIndexes().add(neighbourPoint.getNum());
+                        neighbours.add(neighbourPoint.getNum());
+                    } else {
+                        neighbours.add(null);
                     }
                 }
                 list.add(node);
