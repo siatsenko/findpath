@@ -32,7 +32,7 @@ public class PrepareHandlerTest {
     @Test
     public void getNodesFromArray() {
         PrepareHandler prepareHandler = new PrepareHandler(LIST);
-        List<Node> nodes = prepareHandler.getNodesFromArray();
+        List<Node> nodes = prepareHandler.getNodes();
         assertEquals(40, nodes.size());
         assertTrue(nodes.get(11).isStart());
         assertTrue(nodes.get(39).isFinish());

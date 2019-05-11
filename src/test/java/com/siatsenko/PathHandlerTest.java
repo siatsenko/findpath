@@ -15,20 +15,20 @@ public class PathHandlerTest {
         ..X.
     */
     private static final List<Node> NODES = new ArrayList<>(Arrays.asList(
-            new Node(0, false, false, Arrays.asList(1, 4)),
-            new Node(1, true, false, Arrays.asList(0, 2)),
-            new Node(2, false, false, Arrays.asList(1, 3, 6)),
-            new Node(3, false, false, Arrays.asList(2, 7)),
+            new Node(0, false, false, Arrays.asList(1, 4, null, null)),
+            new Node(1, true, false, Arrays.asList(2, null, 0, null)),
+            new Node(2, false, false, Arrays.asList(3, 6, 1, null)),
+            new Node(3, false, false, Arrays.asList(null, 2, 7, null)),
 
-            new Node(4, false, false, Arrays.asList(0, 8)),
+            new Node(4, false, false, Arrays.asList(null, 8, null, 0)),
             null,
-            new Node(6, false, false, Arrays.asList(2, 7, 10)),
-            new Node(7, false, false, Arrays.asList(3, 11, 6)),
+            new Node(6, false, false, Arrays.asList(7, 10, null, 2)),
+            new Node(7, false, false, Arrays.asList(null, 11, 6, 3)),
 
-            new Node(8, false, false, Arrays.asList(4, 9)),
-            new Node(9, false, false, Arrays.asList(8, 10)),
-            new Node(10, false, true, Arrays.asList(6, 11, 9)),
-            new Node(11, false, false, Arrays.asList(7, 10))
+            new Node(8, false, false, Arrays.asList(9, null, null, 4)),
+            new Node(9, false, false, Arrays.asList(10, null, 8, null)),
+            new Node(10, false, true, Arrays.asList(11, null, 9, 6)),
+            new Node(11, false, false, Arrays.asList(null, null, 10, 7))
     ));
 
     @Test
@@ -44,11 +44,8 @@ public class PathHandlerTest {
     }
 
     @Test
-    public void pushWave() {
+    public void findPath() {
         PathHandler pathHandler = new PathHandler(NODES);
-        List<Node> nodes = pathHandler.pushWave();
-        assertEquals(2, nodes.get(4).getStep());
-        assertEquals(3, nodes.get(7).getStep());
-        assertEquals(3, nodes.get(10).getStep());
+        assertEquals("l,d,d", pathHandler.findPath());
     }
 }

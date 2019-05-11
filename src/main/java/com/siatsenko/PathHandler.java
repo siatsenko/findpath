@@ -3,6 +3,8 @@ package com.siatsenko;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.siatsenko.GeneralProperties.*;
+
 public class PathHandler {
 
     List<Node> nodes;
@@ -14,7 +16,7 @@ public class PathHandler {
         setIndexes();
     }
 
-    List<Node> pushWave() {
+    String findPath() {
         LinkedList<Node> queue = new LinkedList<>();
         Node startNode = nodes.get(startIndex);
         startNode.setState(NodeState.FOUND);
@@ -23,19 +25,29 @@ public class PathHandler {
 
         while (!queue.isEmpty()) {
             Node node = queue.poll();
-            int nextStep = node.getStep()+1;
-            for (Integer index : node.getNeighboursIndexes()) {
+            int nextStep = node.getStep() + 1;
+            List<Integer> neighbours = node.getNeighboursIndexes();
+            for (int i = 0; i < 4; i++) {
+                Integer index = neighbours.get(i);
+                if (index == null) {
+                    continue;
+                }
                 Node currNode = nodes.get(index);
-                if (currNode.getState()==NodeState.UNTOUCHED) {
+                if (currNode.getState() == NodeState.UNTOUCHED) {
                     currNode.setState(NodeState.FOUND);
                     currNode.setStep(nextStep);
                     queue.offer(currNode);
+                    String path = node.getPath();
+                    String currPath = (path == null ? "" : (path + ",")) + STEPS.get(i);
+                    currNode.setPath(currPath);
+                    if (currNode.isFinish()) {
+                        return currPath;
                     }
+                }
             }
             node.setState(NodeState.PROCESSED);
         }
-
-        return this.nodes;
+        return PATH_NOT_FOUND;
     }
 
     void setIndexes() {

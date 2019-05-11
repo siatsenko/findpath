@@ -22,7 +22,7 @@ public class PrepareHandler {
         this.colCount = mazeArray[0].length;
     }
 
-    List<Node> getNodesFromArray() {
+    List<Node> getNodes() {
         List<Node> list = new ArrayList<>(rowCount * colCount);
         for (int row = 0; row < rowCount; row++) {
             for (int col = 0; col < colCount; col++) {

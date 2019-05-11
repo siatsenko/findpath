@@ -47,6 +47,27 @@ public class InputHandlerTest {
             "........#...."
     );
 
+    private static final List<String> WRONG_LIST_4 = Arrays.asList(
+            ".............",
+            "..S...#..#...",
+            "..S...#.#....",
+            "........#..X."
+    );
+
+    private static final List<String> WRONG_LIST_5 = Arrays.asList(
+            ".............",
+            "..S...#..#...",
+            "......#.#....",
+            "........#..XX"
+    );
+
+    private static final List<String> WRONG_LIST_6 = Arrays.asList(
+            "............,",
+            "..S...#..#...",
+            "......#.#....",
+            "........#..X."
+    );
+
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
@@ -66,7 +87,6 @@ public class InputHandlerTest {
     public void checkValidInputListWrong1() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Wrong list size");
-        InputHandler inputHandler = new InputHandler();
         new InputHandler().checkValidInputList(WRONG_LIST_1);
     }
 
@@ -82,6 +102,27 @@ public class InputHandlerTest {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Finish marker not found");
         new InputHandler().checkValidInputList(WRONG_LIST_3);
+    }
+
+    @Test
+    public void checkValidInputListWrong4() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("Maze has more then one Start marker");
+        new InputHandler().checkValidInputList(WRONG_LIST_4);
+    }
+
+    @Test
+    public void checkValidInputListWrong5() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("Maze has more then one Finish marker");
+        new InputHandler().checkValidInputList(WRONG_LIST_5);
+    }
+
+    @Test
+    public void checkValidInputListWrong6() {
+        expectedEx.expect(RuntimeException.class);
+        expectedEx.expectMessage("Maze has forbidden symbol");
+        new InputHandler().checkValidInputList(WRONG_LIST_6);
     }
 
 }

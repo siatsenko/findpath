@@ -11,14 +11,13 @@ public class Node {
     private NodeState state;
     private int step;
     private List<Integer> neighboursIndexes;
-    private List<Node> path;
+    private String path;
 
     public Node(int num) {
         this.num = num;
         this.state = NodeState.UNTOUCHED;
         this.step = 0;
-        this.neighboursIndexes = new ArrayList<Integer>();
-        this.path = new ArrayList<Node>();
+        this.neighboursIndexes = new ArrayList<Integer>(4);
     }
 
     public Node(int num, boolean start, boolean finish, List<Integer> neighboursIndexes) {
@@ -74,15 +73,11 @@ public class Node {
         return neighboursIndexes;
     }
 
-    public void setNeighboursIndexes(List<Integer> neighboursIndexes) {
-        this.neighboursIndexes = neighboursIndexes;
-    }
-
-    public List<Node> getPath() {
+    public String getPath() {
         return path;
     }
 
-    public void setPath(List<Node> path) {
+    public void setPath(String path) {
         this.path = path;
     }
 

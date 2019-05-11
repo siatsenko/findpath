@@ -40,8 +40,8 @@ public class InputHandler {
     }
 
     boolean checkValidInputList(List<String> list) {
-        boolean startFound = false;
-        boolean finishFound = false;
+        long startCount = 0;
+        long finishCount = 0;
 
         if ((list == null) || (list.size() == 0) || list.get(0).length() == 0) {
             throw new RuntimeException("Wrong list size");
@@ -52,14 +52,30 @@ public class InputHandler {
             if (length != columnsCount) {
                 throw new RuntimeException("Wrong list size");
             }
-            startFound = startFound || s.contains(String.valueOf(START_SYMBOL));
-            finishFound = finishFound || s.contains(String.valueOf(FINISH_SYMBOL));
+            long forbiddenCount = s.chars()
+                    .filter(ch -> ch != FREE_SYMBOL)
+                    .filter(ch -> ch != BLOCKED_SYMBOL)
+                    .filter(ch -> ch != START_SYMBOL)
+                    .filter(ch -> ch != FINISH_SYMBOL)
+                    .count();
+            if (forbiddenCount != 0) {
+                throw new RuntimeException("Maze has forbidden symbol");
+            }
+
+            startCount = startCount + s.chars().filter(ch -> ch == START_SYMBOL).count();
+            finishCount = finishCount + s.chars().filter(ch -> ch == FINISH_SYMBOL).count();
         }
-        if (!startFound) {
+        if (startCount == 0) {
             throw new RuntimeException("Start marker not found");
         }
-        if (!finishFound) {
+        if (finishCount == 0) {
             throw new RuntimeException("Finish marker not found");
+        }
+        if (startCount > 1) {
+            throw new RuntimeException("Maze has more then one Start marker");
+        }
+        if (finishCount > 1) {
+            throw new RuntimeException("Maze has more then one Finish marker");
         }
         return true;
     }
