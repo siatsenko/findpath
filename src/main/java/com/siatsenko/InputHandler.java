@@ -1,12 +1,13 @@
+package com.siatsenko;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import static com.siatsenko.GeneralProperties.*;
 
 public class InputHandler {
-    private char statrChar = 'S';
-    private char finishChar = 'X';
 
     private Reader reader;
 
@@ -50,8 +51,8 @@ public class InputHandler {
             if (length != columnsCount) {
                 throw new RuntimeException("Wrong list size");
             }
-            startFound = startFound || s.contains(String.valueOf(statrChar));
-            finishFound = finishFound || s.contains(String.valueOf(finishChar));
+            startFound = startFound || s.contains(String.valueOf(START_SYMBOL));
+            finishFound = finishFound || s.contains(String.valueOf(FINISH_SYMBOL));
         }
         if (!startFound) {
             throw new RuntimeException("Start marker not found");

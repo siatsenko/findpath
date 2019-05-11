@@ -1,3 +1,5 @@
+package com.siatsenko;
+
 import java.util.List;
 
 public class Node {

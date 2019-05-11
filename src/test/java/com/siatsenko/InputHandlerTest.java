@@ -1,3 +1,6 @@
+package com.siatsenko;
+
+import com.siatsenko.InputHandler;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
