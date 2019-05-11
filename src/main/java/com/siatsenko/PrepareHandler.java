@@ -1,9 +1,7 @@
 package com.siatsenko;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.siatsenko.GeneralProperties.*;
 
@@ -49,7 +47,7 @@ public class PrepareHandler {
                         continue;
                     }
                     if (neighbourPoint.getValue() != BLOCKED_SYMBOL) {
-                        node.getNeighbours().add(neighbourPoint.getNum());
+                        node.getNeighboursIndexes().add(neighbourPoint.getNum());
                     }
                 }
                 list.add(node);

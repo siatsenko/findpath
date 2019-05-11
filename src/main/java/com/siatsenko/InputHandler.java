@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.siatsenko.GeneralProperties.*;
 
 public class InputHandler {

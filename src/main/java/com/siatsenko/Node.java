@@ -2,7 +2,6 @@ package com.siatsenko;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Node {
     private int num;
@@ -10,16 +9,25 @@ public class Node {
     private boolean finish;
 
     private NodeState state;
-    private int stepCount;
-    private List<Integer> neighbours;
+    private int step;
+    private List<Integer> neighboursIndexes;
     private List<Node> path;
 
     public Node(int num) {
         this.num = num;
         this.state = NodeState.UNTOUCHED;
-        this.stepCount = 0;
-        this.neighbours = new ArrayList<Integer>();
+        this.step = 0;
+        this.neighboursIndexes = new ArrayList<Integer>();
         this.path = new ArrayList<Node>();
+    }
+
+    public Node(int num, boolean start, boolean finish, List<Integer> neighboursIndexes) {
+        this.num = num;
+        this.start = start;
+        this.finish = finish;
+        this.state = NodeState.UNTOUCHED;
+        this.step = 0;
+        this.neighboursIndexes = neighboursIndexes;
     }
 
     public int getNum() {
@@ -54,20 +62,20 @@ public class Node {
         this.state = state;
     }
 
-    public int getStepCount() {
-        return stepCount;
+    public int getStep() {
+        return step;
     }
 
-    public void setStepCount(int stepCount) {
-        this.stepCount = stepCount;
+    public void setStep(int step) {
+        this.step = step;
     }
 
-    public List<Integer> getNeighbours() {
-        return neighbours;
+    public List<Integer> getNeighboursIndexes() {
+        return neighboursIndexes;
     }
 
-    public void setNeighbours(List<Integer> neighbours) {
-        this.neighbours = neighbours;
+    public void setNeighboursIndexes(List<Integer> neighboursIndexes) {
+        this.neighboursIndexes = neighboursIndexes;
     }
 
     public List<Node> getPath() {
@@ -82,12 +90,7 @@ public class Node {
     public String toString() {
         return "Node{" +
                 "num=" + num +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", state=" + state +
-                ", stepCount=" + stepCount +
-                ", neighbours=" + neighbours +
-                ", path=" + path +
+                ", step=" + step +
                 '}';
     }
 }
